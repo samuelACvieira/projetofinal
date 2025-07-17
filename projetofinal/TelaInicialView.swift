@@ -10,10 +10,10 @@ import SwiftUI
 struct TelaInicialView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
+            Image(systemName:"globe")
                 .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+                .foregroundStyle(.green)
+            Text("saldo")
         }
         .padding()
     }
