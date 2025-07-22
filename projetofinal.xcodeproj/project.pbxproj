@@ -29,6 +29,25 @@
 		22583B6A2E18671200ED5368 /* projetofinalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = projetofinalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		2282C6662E300D7D001405A6 /* Exceptions for "projetofinalTests" folder in "projetofinalTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				projetofinalUITests/projetofinalUITests.swift,
+				projetofinalUITests/projetofinalUITestsLaunchTests.swift,
+			);
+			target = 22583B5F2E18671200ED5368 /* projetofinalTests */;
+		};
+		2282C6672E300D7D001405A6 /* Exceptions for "projetofinalTests" folder in "projetofinalUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				projetofinalUITests/projetofinalUITests.swift,
+				projetofinalUITests/projetofinalUITestsLaunchTests.swift,
+			);
+			target = 22583B692E18671200ED5368 /* projetofinalUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		22583B552E18671100ED5368 /* projetofinal */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -37,12 +56,11 @@
 		};
 		22583B632E18671200ED5368 /* projetofinalTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2282C6662E300D7D001405A6 /* Exceptions for "projetofinalTests" folder in "projetofinalTests" target */,
+				2282C6672E300D7D001405A6 /* Exceptions for "projetofinalTests" folder in "projetofinalUITests" target */,
+			);
 			path = projetofinalTests;
-			sourceTree = "<group>";
-		};
-		22583B6D2E18671200ED5368 /* projetofinalUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = projetofinalUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -77,7 +95,6 @@
 			children = (
 				22583B552E18671100ED5368 /* projetofinal */,
 				22583B632E18671200ED5368 /* projetofinalTests */,
-				22583B6D2E18671200ED5368 /* projetofinalUITests */,
 				22583B542E18671100ED5368 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -152,9 +169,6 @@
 			);
 			dependencies = (
 				22583B6C2E18671200ED5368 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				22583B6D2E18671200ED5368 /* projetofinalUITests */,
 			);
 			name = projetofinalUITests;
 			packageProductDependencies = (
