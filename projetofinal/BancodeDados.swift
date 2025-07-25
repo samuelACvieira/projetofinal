@@ -11,7 +11,7 @@ import SwiftData
 enum Category: String, Codable{
     case Alimentacao = "Alimentação"
     case Assinaturas = "Assinaturas"
-    case Cuidados_pessoais = "Cuidados Pessoais"
+    case Cuidados_Pessoais = "Cuidados Pessoais"
     case Dividas = "Dívidas"
     case Economias = "Economias"
     case Educacao = "Educação"
@@ -27,10 +27,14 @@ class Gasto: Identifiable {
     var name: String
     var value: Double
     var category: Category
+    var date: Date
+    var comentary: String
     
-    init(name: String, value: Double, category: Category) {
+    init(name: String, value: Double, category: Category, date: Date, comentary: String) {
         self.name = name
         self.value = value
         self.category = category
+        self.date = date
+        self.comentary = comentary
     }
 }

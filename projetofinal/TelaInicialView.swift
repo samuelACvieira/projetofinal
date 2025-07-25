@@ -1,5 +1,6 @@
 import SwiftUI
 import UIKit
+import SwiftData
 struct TelaInicialView: View {
     @State private var valorAtual: Double = 400
     let meta: Double = 1000
