@@ -1,5 +1,5 @@
 import SwiftUI
-
+import SwiftData
 struct TelaInicialView: View {
     @State private var textoOrcamento: String = ""
     @State private var orcamento: Double? = nil
