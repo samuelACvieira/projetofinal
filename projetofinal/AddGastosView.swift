@@ -35,6 +35,10 @@ struct AddGastosView: View {
                         selection: $gastoDate,
                         displayedComponents: .date
                     )
+//                    .datePickerStyle(.wheel)
+//                    .labelsHidden() // Esconde o rótulo, opcional
+//
+//                    .padding()
                     Picker(
                         "Selecionar categoria",
                         selection: $gastoCategory
