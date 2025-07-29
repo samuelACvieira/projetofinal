@@ -58,7 +58,7 @@ struct AddGastosView: View {
                 }
             }
                 Section{
-                    Text("Adicionar comentário sobre o gasto")
+                    Text("Adicionar comentário sobre o gasto:")
                     TextEditor(text: $gastoComentary)
                         .padding(7)
                                 .frame(height: 200)

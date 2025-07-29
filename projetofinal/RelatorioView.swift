@@ -16,7 +16,7 @@ struct CategoryExpense: Identifiable {
 }
 
 // MARK: - VIEW PRINCIPAL
-struct ContentView: View {
+struct RelatorioView: View {
     // Armazenamento dinâmico
     @State private var budget: Double = 0
     @State private var spent: Double = 0
@@ -129,4 +129,7 @@ struct PieChartView: View {
         .frame(height: 250)
         .padding()
     }
+}
+#Preview {
+    RelatorioView()
 }
