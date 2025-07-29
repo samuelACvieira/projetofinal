@@ -1,5 +1,6 @@
 import SwiftUI
 import UIKit
+import SwiftData
 struct TelaInicialView: View {
     @State private var saldo: Int?
     @State private var saldoTexto: String = ""
