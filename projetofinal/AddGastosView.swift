@@ -26,8 +26,8 @@ struct AddGastosView: View {
         NavigationStack {
             Form {
                 Section{
-                    TextField("Digitar valor do gasto", text: $gastoName)
-                    TextField("Adicionar comentário sobre o gasto", text: $gastoComentary)
+                    Text("Digitar valor do gasto:")
+                    TextEditor(text: $gastoName)
                 }
                 Section{
                     DatePicker(
@@ -57,6 +57,19 @@ struct AddGastosView: View {
                         Text("\(Category.Transporte.rawValue)").tag(Category.Transporte)
                 }
             }
+                Section{
+                    Text("Adicionar comentário sobre o gasto")
+                    TextEditor(text: $gastoComentary)
+                        .padding(7)
+                                .frame(height: 200)
+                                .background(Color.gray.opacity(0.2))
+                                .cornerRadius(8)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(Color.gray, lineWidth: 0)
+                                )
+
+                }
         }
             .navigationTitle("NexFin")
             .navigationBarTitleDisplayMode(.inline)
