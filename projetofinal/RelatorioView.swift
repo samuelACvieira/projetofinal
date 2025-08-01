@@ -1,7 +1,57 @@
 import SwiftUI
 import Charts
 
-// MARK: - MODELOS
+struct ContentView: View {
+    @State private var saldo: Double = 1599.99
+    @State private var saldoTexto: String = ""
+
+    var body: some View {
+        ZStack {
+            Color(hex: "4AB578").ignoresSafeArea()
+                .position(x: 200, y: 30)
+            
+            VStack {
+                Text("Orçamento:")
+                    .font(.title2)
+                    .bold()
+                    .foregroundColor(Color(hex: "e8e8e8"))
+                    .position(x: 75, y: 3)
+
+                Text("R$ \(saldo, specifier: "%.2f")")
+                    .font(.title)
+                    .bold()
+                    .foregroundColor(Color(hex: "e8e8e8"))
+                    .position(x: 75, y: 10)
+
+                Button(action: {
+                    if let valor = Double(saldoTexto.replacingOccurrences(of: ",", with: ".")) {
+                        saldo = valor
+                    }
+                }) {
+                    HStack {
+                        Spacer()
+                        VStack {
+                            Text("+")
+                                .foregroundColor(.white)
+                                .frame(width: 50, height: 50)
+                                .background(Color(hex: "279d57"))
+                                .clipShape(Circle())
+                                .font(.headline)
+                                .multilineTextAlignment(.center)
+                                .position(x: 350, y: -45)
+                        }
+                    }
+                }
+
+                TextField("Novo valor", text: $saldoTexto)
+                    .keyboardType(.decimalPad)
+                    .textFieldStyle(.roundedBorder)
+                    .padding()
+            }
+        }
+    }
+}
+
 struct BudgetData: Identifiable {
     let id = UUID()
     let name: String
@@ -14,9 +64,8 @@ struct CategoryExpense: Identifiable {
     let amount: Double
 }
 
-// MARK: - VIEW PRINCIPAL
-struct ContentView: View {
-    // Armazenamento dinâmico
+struct RelatorioView: View {
+
     @State private var budget: Double = 0
     @State private var spent: Double = 0
     
@@ -35,44 +84,7 @@ struct ContentView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 30) {
-                    GroupBox("📥 Entrar orçamento e gasto") {
-                        VStack(spacing: 12) {
-                            HStack {
-                                Text("Orçamento:")
-                                TextField("Ex: 3000", value: $budget, format: .number)
-                                    .keyboardType(.decimalPad)
-                                    .textFieldStyle(.roundedBorder)
-                            }
-                            HStack {
-                                Text("Gasto total:")
-                                TextField("Ex: 2200", value: $spent, format: .number)
-                                    .keyboardType(.decimalPad)
-                                    .textFieldStyle(.roundedBorder)
-                            }
-                        }
-                        .padding(.horizontal)
-                    }
                     
-                    GroupBox("➕ Adicionar categoria") {
-                        VStack(spacing: 12) {
-                            TextField("Categoria (ex: Alimentação)", text: $categoryName)
-                                .textFieldStyle(.roundedBorder)
-                            TextField("Valor (ex: 500)", text: $categoryValue)
-                                .keyboardType(.decimalPad)
-                                .textFieldStyle(.roundedBorder)
-                            Button("Adicionar") {
-                                if let value = Double(categoryValue), !categoryName.isEmpty {
-                                    let newExpense = CategoryExpense(category: categoryName, amount: value)
-                                    categories.append(newExpense)
-                                    categoryName = ""
-                                    categoryValue = ""
-                                }
-                            }
-                            .buttonStyle(.borderedProminent)
-                        }
-                        .padding(.horizontal)
-                    }
-
                     Divider()
 
                     Text("📊 Orçamento x Gasto")
@@ -128,4 +140,7 @@ struct PieChartView: View {
         .frame(height: 250)
         .padding()
     }
+}
+#Preview {
+    RelatorioView()
 }
