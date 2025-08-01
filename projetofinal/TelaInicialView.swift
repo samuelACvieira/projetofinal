@@ -1,25 +1,27 @@
 import SwiftUI
 import SwiftData
+
 struct TelaInicialView: View {
+    @Query var gastos: [Gasto]  // SwiftData traz os dados automaticamente
+
     @State private var textoOrcamento: String = ""
     @State private var orcamento: Double? = nil
     @State private var editandoOrcamento: Bool = false
     @FocusState private var campoFocado: Bool
+
     var body: some View {
         VStack(spacing: 5) {
+            // 🔷 Cabeçalho com orçamento
             ZStack {
                 Color(hex: "4AB578")
                     .ignoresSafeArea()
-                    .frame(height: 160)
-                HStack {
+                    .frame(height: 200)
+
+                VStack(alignment: .leading, spacing: 10) {
                     Text("Orçamento:")
                         .font(.title2)
                         .bold()
                         .foregroundColor(Color(hex: "e8e8e8"))
-                    Spacer()
-                }
-                .padding(.horizontal)
-                        
 
                     HStack(spacing: 8) {
                         Text(orcamento != nil ? String(format: "R$ %.2f", orcamento!) : "")
@@ -29,6 +31,7 @@ struct TelaInicialView: View {
 
                         Button(action: {
                             editandoOrcamento.toggle()
+                            campoFocado = true
                         }) {
                             Image(systemName: "pencil")
                                 .foregroundColor(.white)
@@ -45,7 +48,7 @@ struct TelaInicialView: View {
                                 .cornerRadius(8)
                                 .frame(width: 200)
                                 .focused($campoFocado)
-                            
+
                             Button("Salvar") {
                                 let valor = textoOrcamento.replacingOccurrences(of: ",", with: ".")
                                 if let numero = Double(valor) {
@@ -59,54 +62,38 @@ struct TelaInicialView: View {
                             .padding(.vertical, 8)
                             .background(Color(hex: "279d57"))
                             .cornerRadius(10)
-                            .ignoresSafeArea()
                         }
                     }
-                
+                }
+                .padding(.horizontal)
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
 
-            HStack(spacing: 70) {
-                // GASTOS TOTAIS
-                VStack {
-                    Text("-958,89")
-                        .font(.title)
-                        .bold()
-                        .foregroundColor(Color(hex: "e8e8e8"))
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .frame(width: 174, height: 70)
-                                .foregroundStyle(Color(hex: "e65252"))
-                        )
-                    Text("Gastos Totais")
-                        .foregroundColor(Color(hex: "e8e8e8"))
-                        .font(.caption)
-                }
-
-                // ECONOMIAS TOTAIS
-                VStack {
-                    Text("+958,89")
-                        .font(.title)
-                        .bold()
-                        .foregroundColor(Color(hex: "5eb169"))
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .frame(width: 174, height: 70)
-                                .foregroundStyle(Color(hex: "e8e8e8"))
-                        )
-                    Text("Economias Totais")
-                        .foregroundStyle(Color(hex: "454545"))
-                        .font(.caption)
+            // lista de categorias e gastos
+            List {
+                ForEach(Category.allCases, id: \.self) { categoria in
+                    let total = gastos
+                        .filter { $0.category == categoria }
+                        .map { $0.value }
+                        .reduce(0, +)
+                    
+                    if total > 0 {
+                        HStack {
+                            Text(categoria.rawValue)
+                            Spacer()
+                            Text(String(format: "R$ %.2f", total))
+                                .bold()
+                        }
+                    }
                 }
             }
-            .padding(.top, 25)
 
             Spacer()
         }
     }
 }
 
-// ✅ Preview fora da struct principal
+// ✅ Preview
 #Preview {
     TelaInicialView()
 }
-
