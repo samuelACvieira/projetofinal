@@ -18,7 +18,7 @@ struct TelaInicialView: View {
                 ZStack {
                     Color(hex: "4AB578")
                         .ignoresSafeArea()
-                        .frame(height: 110)
+                        .frame(height: 100)
 
                     VStack(alignment: .leading, spacing: 0) {
                         HStack(spacing: 20) {
@@ -116,4 +116,5 @@ struct TelaInicialView: View {
 
 #Preview {
     TelaInicialView()
+        .modelContainer(for: Gasto.self)
 }
