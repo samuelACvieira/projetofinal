@@ -15,12 +15,14 @@ enum Category: String, Codable, CaseIterable{
     case Dividas = "Dívidas"
     case Economias = "Economias"
     case Educacao = "Educação"
-    case Hobbies = "Hoobies"
+    case Hobbies = "Hobbies"
     case Lazer = "Lazer"
     case Pets = "Pets"
     case Roupas = "Roupas"
     case Tecnologia = "Tecnologia"
     case Transporte = "Transporte"
+    
+    
 }
 @Model
 class Gasto: Identifiable {
