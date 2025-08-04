@@ -95,6 +95,12 @@ struct TelaInicialView: View {
                             .foregroundColor(Color(hex: "e8e8e8"))
                     }
                 }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: RelatorioView()) {
+                        Image(systemName: "list.clipboard.fill")
+                            .foregroundColor(Color(hex: "e8e8e8"))
+                    }
+                }
             }
         }
         .onAppear {

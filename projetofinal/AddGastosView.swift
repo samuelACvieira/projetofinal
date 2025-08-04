@@ -7,7 +7,7 @@ struct AddGastosView: View {
 
     @State private var gastoName: String = ""
     @State private var gastoValueText: String = ""
-    @State private var gastoCategory: Category = .Lazer
+    @State private var gastoCategory: Category = .Alimentacao
     @State private var gastoDate: Date = Date()
     @State private var gastoComentary: String = ""
 

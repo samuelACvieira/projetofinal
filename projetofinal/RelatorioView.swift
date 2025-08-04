@@ -18,6 +18,8 @@ struct CategoryExpense: Identifiable {
 // MARK: - VIEW PRINCIPAL
 struct RelatorioView: View {
     // Armazenamento dinâmico
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
     @State private var budget: Double = 0
     @State private var spent: Double = 0
     
@@ -36,44 +38,6 @@ struct RelatorioView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 30) {
-                    GroupBox("📥 Entrar orçamento e gasto") {
-                        VStack(spacing: 12) {
-                            HStack {
-                                Text("Orçamento:")
-                                TextField("Ex: 3000", value: $budget, format: .number)
-                                    .keyboardType(.decimalPad)
-                                    .textFieldStyle(.roundedBorder)
-                            }
-                            HStack {
-                                Text("Gasto total:")
-                                TextField("Ex: 2200", value: $spent, format: .number)
-                                    .keyboardType(.decimalPad)
-                                    .textFieldStyle(.roundedBorder)
-                            }
-                        }
-                        .padding(.horizontal)
-                    }
-                    
-                    GroupBox("➕ Adicionar categoria") {
-                        VStack(spacing: 12) {
-                            TextField("Categoria (ex: Alimentação)", text: $categoryName)
-                                .textFieldStyle(.roundedBorder)
-                            TextField("Valor (ex: 500)", text: $categoryValue)
-                                .keyboardType(.decimalPad)
-                                .textFieldStyle(.roundedBorder)
-                            Button("Adicionar") {
-                                if let value = Double(categoryValue), !categoryName.isEmpty {
-                                    let newExpense = CategoryExpense(category: categoryName, amount: value)
-                                    categories.append(newExpense)
-                                    categoryName = ""
-                                    categoryValue = ""
-                                }
-                            }
-                            .buttonStyle(.borderedProminent)
-                        }
-                        .padding(.horizontal)
-                    }
-
                     Divider()
 
                     Text("📊 Orçamento x Gasto")
@@ -86,7 +50,14 @@ struct RelatorioView: View {
                 }
                 .padding()
             }
-            .navigationTitle("Resumo Financeiro")
+            .navigationTitle("Relatório Financeiro")
+            .toolbar{
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Voltar") {
+                        dismiss()
+                    }
+                }
+            }
         }
     }
 }
@@ -130,6 +101,15 @@ struct PieChartView: View {
         .padding()
     }
 }
+//    .toolbar{
+//        ToolbarItem(placement: .navigationBarTrailing) {
+//            NavigationLink(destination: RelatorioView()) {
+//                Image(systemName: "list.clipboard.fill")
+//                    .foregroundColor(Color(hex: "e8e8e8"))
+//            }
+//        }
+//    }
 #Preview {
     RelatorioView()
+        .modelContainer(for: Gasto.self)
 }
